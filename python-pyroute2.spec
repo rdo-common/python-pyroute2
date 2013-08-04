@@ -2,7 +2,7 @@
 
 Name: python-%{pkgname}
 Version: 0.1.10
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 Group: Development/Languages
@@ -32,6 +32,9 @@ progress.
 %{python_sitelib}/%{pkgname}*
 
 %changelog
+* Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.1.10-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Tue Jun 26 2013 Peter V. Saveliev <peet@redhat.com> 0.1.10-1
 - fd and threads leaks fixed
 - shutdown sequence fixed (release() calls)
