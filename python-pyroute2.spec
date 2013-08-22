@@ -1,8 +1,8 @@
 %global pkgname pyroute2
 
 Name: python-%{pkgname}
-Version: 0.1.10
-Release: 2%{?dist}
+Version: 0.1.11
+Release: 1%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 Group: Development/Languages
@@ -32,6 +32,10 @@ progress.
 %{python_sitelib}/%{pkgname}*
 
 %changelog
+* Thu Aug 22 2013 Peter V. Saveliev <peet@redhat.com> 0.1.11-1
+- IPRSocket threadless objects
+- rtnl: tc filters improvements
+
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.1.10-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
