@@ -1,7 +1,7 @@
 %global pkgname pyroute2
 
 Name: python-%{pkgname}
-Version: 0.1.11
+Version: 0.2.7
 Release: 1%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
@@ -10,7 +10,7 @@ URL: https://github.com/svinota/%{pkgname}
 
 BuildArch: noarch
 BuildRequires: python2-devel
-Source: http://peet.spb.ru/archives/%{pkgname}-%{version}.tar.gz
+Source: https://pypi.python.org/packages/source/p/pyroute2/pyroute2-%{version}.tar.gz
 
 %description
 PyRoute2 provides basic netlink interface for Python programs. Aiming
@@ -28,10 +28,13 @@ progress.
 %{__python} setup.py install --root $RPM_BUILD_ROOT
 
 %files
-%doc STATUS* README* LICENSE
+%doc README* LICENSE
 %{python_sitelib}/%{pkgname}*
 
 %changelog
+* Tue Mar 18 2014 Jiri Pirko <jpirko@redhat.com> - 0.2.7-1
+- Update to 0.2.7
+
 * Thu Aug 22 2013 Peter V. Saveliev <peet@redhat.com> 0.1.11-1
 - IPRSocket threadless objects
 - rtnl: tc filters improvements
