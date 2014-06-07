@@ -2,7 +2,7 @@
 
 Name: python-%{pkgname}
 Version: 0.2.7
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 Group: Development/Languages
@@ -32,6 +32,9 @@ progress.
 %{python_sitelib}/%{pkgname}*
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.2.7-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Tue Mar 18 2014 Jiri Pirko <jpirko@redhat.com> - 0.2.7-1
 - Update to 0.2.7
 
