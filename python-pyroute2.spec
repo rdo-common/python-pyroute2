@@ -1,8 +1,8 @@
 %global pkgname pyroute2
 
 Name: python-%{pkgname}
-Version: 0.2.7
-Release: 2%{?dist}
+Version: 0.3.2
+Release: 1%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 Group: Development/Languages
@@ -13,10 +13,9 @@ BuildRequires: python2-devel
 Source: https://pypi.python.org/packages/source/p/pyroute2/pyroute2-%{version}.tar.gz
 
 %description
-PyRoute2 provides basic netlink interface for Python programs. Aiming
-to provide a complete implementation of several netlink families, this
-library is still in alpha state, so check STATUS file, the work is in
-progress.
+PyRoute2 provides several levels of API to work with Netlink
+protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
+IPQ.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
@@ -32,6 +31,9 @@ progress.
 %{python_sitelib}/%{pkgname}*
 
 %changelog
+* Tue Nov 18 2014 Peter V. Saveliev <peter@svinota.eu> 0.3.2-1
+- Update to 0.3.2
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.2.7-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
