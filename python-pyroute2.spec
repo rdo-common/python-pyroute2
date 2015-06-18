@@ -2,7 +2,7 @@
 
 Name: python-%{pkgname}
 Version: 0.3.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 Group: Development/Languages
@@ -31,6 +31,9 @@ IPQ.
 %{python_sitelib}/%{pkgname}*
 
 %changelog
+* Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.4-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Thu Jan  8 2015 Peter V. Saveliev <peter@svinota.eu> 0.3.4-1
 - Network namespaces support
 - Veth, tuntap
