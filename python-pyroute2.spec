@@ -2,7 +2,7 @@
 
 Name: python-%{pkgname}
 Version: 0.3.15
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 Group: Development/Languages
@@ -31,6 +31,9 @@ IPQ.
 %{python_sitelib}/%{pkgname}*
 
 %changelog
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.3.15-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Fri Nov 20 2015 Peter V. Saveliev <peter@svinota.eu> 0.3.15-1
 - critical NetNS fd leak fix
 
