@@ -3,7 +3,7 @@
 
 Name: python-%{srcname}
 Version: 0.3.19
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: %{sum}
 License: GPLv2+
 Group: Development/Languages
@@ -57,6 +57,9 @@ IPQ.
 %{python3_sitelib}/%{srcname}*
 
 %changelog
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.19-2
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
 * Tue Apr  5 2016 Peter V. Saveliev <peter@svinota.eu> 0.3.19-1
 - separate Python2 and Python3 packages
 - MPLS lwtunnel support
