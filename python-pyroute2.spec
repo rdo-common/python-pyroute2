@@ -1,17 +1,20 @@
 %global srcname pyroute2
 %global sum Pure Python netlink library
 
+%{!?python3_pkgversion:%global python3_pkgversion 3}
+
 Name: python-%{srcname}
-Version: 0.3.19
-Release: 2%{?dist}
+Version: 0.4.8
+Release: 1%{?dist}
 Summary: %{sum}
 License: GPLv2+
 Group: Development/Languages
 URL: https://github.com/svinota/%{srcname}
 
 BuildArch: noarch
-BuildRequires: python2-devel python3-devel
-Source: https://pypi.python.org/packages/source/p/pyroute2/pyroute2-%{version}.tar.gz
+BuildRequires: python2-devel
+BuildRequires: python%{python3_pkgversion}-devel
+Source: https://pypi.io/packages/source/p/pyroute2/pyroute2-%{version}.tar.gz
 
 %description
 PyRoute2 provides several levels of API to work with Netlink
@@ -27,11 +30,11 @@ PyRoute2 provides several levels of API to work with Netlink
 protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
 IPQ.
 
-%package -n python3-%{srcname}
+%package -n python%{python3_pkgversion}-%{srcname}
 Summary: %{sum}
-%{?python_provide:%python_provide python3-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
-%description -n python3-%{srcname}
+%description -n python%{python3_pkgversion}-%{srcname}
 PyRoute2 provides several levels of API to work with Netlink
 protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
 IPQ.
@@ -52,11 +55,14 @@ IPQ.
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python2_sitelib}/%{srcname}*
 
-%files -n python3-%{srcname}
+%files -n python%{python3_pkgversion}-%{srcname}
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python3_sitelib}/%{srcname}*
 
 %changelog
+* Tue Sep 27 2016 Peter V. Saveliev <peter@svinota.eu> 0.4.8-1
+- uplift to 0.4.x
+
 * Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.19-2
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
