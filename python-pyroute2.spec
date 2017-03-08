@@ -4,8 +4,8 @@
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
 Name: python-%{srcname}
-Version: 0.4.10
-Release: 3%{?dist}
+Version: 0.4.13
+Release: 1%{?dist}
 Summary: %{sum}
 License: GPLv2+
 Group: Development/Languages
@@ -60,6 +60,18 @@ IPQ.
 %{python3_sitelib}/%{srcname}*
 
 %changelog
+* Tue Mar  7 2017 Antoni S. Puimedon <antonisp@celebdor.com> 0.4.13-1
+- upgrade to 0.4.13
+- ipset hash:mac support
+- ipset: hash:mac support
+- ipset: list:set support
+- ifinfmsg: allow absolute/relative paths in the net_ns_fd NLA
+- ipdb: #322 -- IPv6 updates on interfaces in DOWN state
+- rtnl: #284 -- support vlan_flags
+- ipdb: #307 -- fix IPv6 routes management
+- ipdb: #311 -- vlan interfaces address loading
+- iprsocket: #305 -- support NETLINK_LISTEN_ALL_NSID
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.10-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
