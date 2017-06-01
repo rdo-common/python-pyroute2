@@ -4,7 +4,7 @@
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
 Name: python-%{srcname}
-Version: 0.4.13
+Version: 0.4.15
 Release: 1%{?dist}
 Summary: %{sum}
 License: GPLv2+
@@ -60,6 +60,12 @@ IPQ.
 %{python3_sitelib}/%{srcname}*
 
 %changelog
+* Thu Jun  1 2017 Haïkel Guémar <hguemar@fedoraproject.org> - 0.4.15-1
+- Upstream 0.4.15
+- req: #365 -- full and short nla notation fixed, critical
+- iproute: #364 -- new method, brport()
+- ipdb: -- support bridge port options
+
 * Tue Mar  7 2017 Antoni S. Puimedon <antonisp@celebdor.com> 0.4.13-1
 - upgrade to 0.4.13
 - ipset hash:mac support
