@@ -5,7 +5,7 @@
 
 Name: python-%{srcname}
 Version: 0.4.15
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: %{sum}
 License: GPLv2+
 Group: Development/Languages
@@ -60,6 +60,9 @@ IPQ.
 %{python3_sitelib}/%{srcname}*
 
 %changelog
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.15-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Thu Jun  1 2017 Haïkel Guémar <hguemar@fedoraproject.org> - 0.4.15-1
 - Upstream 0.4.15
 - req: #365 -- full and short nla notation fixed, critical
