@@ -4,8 +4,8 @@
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
 Name: python-%{srcname}
-Version: 0.4.15
-Release: 2%{?dist}
+Version: 0.4.19
+Release: 1%{?dist}
 Summary: %{sum}
 License: GPLv2+
 Group: Development/Languages
@@ -60,6 +60,9 @@ IPQ.
 %{python3_sitelib}/%{srcname}*
 
 %changelog
+* Tue Aug 29 2017 hguemar <hguemar@benihime.seireitei> - 0.4.19-1
+- Upstream 0.4.19
+
 * Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.15-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
