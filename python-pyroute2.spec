@@ -4,8 +4,8 @@
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
 Name: python-%{srcname}
-Version: 0.4.19
-Release: 2%{?dist}
+Version: 0.4.21
+Release: 1%{?dist}
 Summary: %{sum}
 License: GPLv2+
 Group: Development/Languages
@@ -60,6 +60,9 @@ IPQ.
 %{python3_sitelib}/%{srcname}*
 
 %changelog
+* Fri Feb 9 2018 amoralej <amoralej@redhat.com> - 0.4.21-1
+- Upstream 0.4.21
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.19-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
