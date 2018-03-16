@@ -3,17 +3,22 @@
 
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
+%if 0%{?rhel} > 7
+# Disable python2 build by default
+%bcond_with python2
+%else
+%bcond_without python2
+%endif
+
 Name: python-%{srcname}
 Version: 0.4.21
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: %{sum}
 License: GPLv2+
 Group: Development/Languages
 URL: https://github.com/svinota/%{srcname}
 
 BuildArch: noarch
-BuildRequires: python2-devel
-BuildRequires: python%{python3_pkgversion}-devel
 Source: https://pypi.io/packages/source/p/pyroute2/pyroute2-%{version}.tar.gz
 
 %description
@@ -21,17 +26,21 @@ PyRoute2 provides several levels of API to work with Netlink
 protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
 IPQ.
 
+%if %{with python2}
 %package -n python2-%{srcname}
 Summary: %{sum}
+BuildRequires: python2-devel
 %{?python_provide:%python_provide python2-%{srcname}}
 
 %description -n python2-%{srcname}
 PyRoute2 provides several levels of API to work with Netlink
 protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
 IPQ.
+%endif
 
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary: %{sum}
+BuildRequires: python%{python3_pkgversion}-devel
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
 %description -n python%{python3_pkgversion}-%{srcname}
@@ -44,22 +53,32 @@ IPQ.
 %setup -q -n %{srcname}-%{version}
 
 %build
+%if %{with python2}
 %py2_build
+%endif
 %py3_build
 
 %install
+%if %{with python2}
 %py2_install
+%endif
 %py3_install
 
+%if %{with python2}
 %files -n python2-%{srcname}
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python2_sitelib}/%{srcname}*
+%endif
 
 %files -n python%{python3_pkgversion}-%{srcname}
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python3_sitelib}/%{srcname}*
 
 %changelog
+* Fri Mar 16 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.4.21-2
+- Conditionalize the Python 2 subpackage
+- Don't build the Python 2 subpackage on EL > 7
+
 * Fri Feb 9 2018 amoralej <amoralej@redhat.com> - 0.4.21-1
 - Upstream 0.4.21
 
