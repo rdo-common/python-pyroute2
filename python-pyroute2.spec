@@ -1,5 +1,4 @@
 %global srcname pyroute2
-%global sum Pure Python netlink library
 
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
@@ -13,9 +12,8 @@
 Name: python-%{srcname}
 Version: 0.4.21
 Release: 2%{?dist}
-Summary: %{sum}
+Summary: Pure Python netlink library
 License: GPLv2+
-Group: Development/Languages
 URL: https://github.com/svinota/%{srcname}
 
 BuildArch: noarch
@@ -28,7 +26,7 @@ IPQ.
 
 %if %{with python2}
 %package -n python2-%{srcname}
-Summary: %{sum}
+Summary: %{summary}
 BuildRequires: python2-devel
 %{?python_provide:%python_provide python2-%{srcname}}
 
@@ -39,7 +37,7 @@ IPQ.
 %endif
 
 %package -n python%{python3_pkgversion}-%{srcname}
-Summary: %{sum}
+Summary: %{summary}
 BuildRequires: python%{python3_pkgversion}-devel
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
