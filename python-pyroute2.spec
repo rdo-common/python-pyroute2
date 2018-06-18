@@ -11,13 +11,16 @@
 
 Name: python-%{srcname}
 Version: 0.4.21
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 URL: https://github.com/svinota/%{srcname}
 
 BuildArch: noarch
 Source: https://pypi.io/packages/source/p/pyroute2/pyroute2-%{version}.tar.gz
+
+# https://github.com/svinota/pyroute2/commit/6153d375ff4b3770f84f0afca8ee0a1b8ea54604
+Patch0: 6153d375ff4b3770f84f0afca8ee0a1b8ea54604.patch
 
 %description
 PyRoute2 provides several levels of API to work with Netlink
@@ -49,6 +52,7 @@ IPQ.
 
 %prep
 %setup -q -n %{srcname}-%{version}
+%patch0 -p1
 
 %build
 %if %{with python2}
@@ -73,6 +77,9 @@ IPQ.
 %{python3_sitelib}/%{srcname}*
 
 %changelog
+* Mon Jun 18 2018 Miro Hrončok <mhroncok@redhat.com> - 0.4.21-3
+- Rebuilt for Python 3.7
+
 * Fri Mar 16 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.4.21-2
 - Conditionalize the Python 2 subpackage
 - Don't build the Python 2 subpackage on EL > 7
