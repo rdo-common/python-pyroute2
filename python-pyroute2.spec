@@ -9,6 +9,14 @@
 %bcond_without python2
 %endif
 
+# FIXME(hguemar): Fix for EL7, in summary
+# Fedora => python2 and python3 variants
+# EL7 => python2 only
+# EL>7 => python3 only
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global with_python3 1
+%endif
+
 Name: python-%{srcname}
 Version: 0.5.2
 Release: 1%{?dist}
@@ -37,6 +45,7 @@ protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
 IPQ.
 %endif
 
+%if %{with python3}
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary: %{summary}
 BuildRequires: python%{python3_pkgversion}-devel
@@ -46,6 +55,7 @@ BuildRequires: python%{python3_pkgversion}-devel
 PyRoute2 provides several levels of API to work with Netlink
 protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
 IPQ.
+%endif
 
 
 %prep
@@ -55,13 +65,17 @@ IPQ.
 %if %{with python2}
 %py2_build
 %endif
+%if %{with python3}
 %py3_build
+%endif
 
 %install
 %if %{with python2}
 %py2_install
 %endif
+%if %{with python3}
 %py3_install
+%endif
 
 %if %{with python2}
 %files -n python2-%{srcname}
@@ -69,9 +83,11 @@ IPQ.
 %{python2_sitelib}/%{srcname}*
 %endif
 
+%if %{with python3}
 %files -n python%{python3_pkgversion}-%{srcname}
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python3_sitelib}/%{srcname}*
+%endif
 
 %changelog
 * Thu Jun 21 2018 Haïkel Guémar <hguemar@fedoraproject.org> - 0.5.2-1
