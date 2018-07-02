@@ -19,7 +19,7 @@
 
 Name: python-%{srcname}
 Version: 0.5.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 URL: https://github.com/svinota/%{srcname}
@@ -90,6 +90,9 @@ IPQ.
 %endif
 
 %changelog
+* Mon Jul 02 2018 Miro Hrončok <mhroncok@redhat.com> - 0.5.2-2
+- Rebuilt for Python 3.7
+
 * Thu Jun 21 2018 Haïkel Guémar <hguemar@fedoraproject.org> - 0.5.2-1
 - Upstream 0.5.2 (includes previous deprecated async arg patch)
 
