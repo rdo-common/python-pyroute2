@@ -19,7 +19,7 @@
 
 Name: python-%{srcname}
 Version: 0.5.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 URL: https://github.com/svinota/%{srcname}
@@ -90,6 +90,9 @@ IPQ.
 %endif
 
 %changelog
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Mon Jul 02 2018 Miro Hrončok <mhroncok@redhat.com> - 0.5.2-2
 - Rebuilt for Python 3.7
 
