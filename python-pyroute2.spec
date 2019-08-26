@@ -2,24 +2,14 @@
 
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
-%if 0%{?rhel} > 7
-# Disable python2 build by default
-%bcond_with python2
-%else
-%bcond_without python2
-%endif
-
 # FIXME(hguemar): Fix for EL7, in summary
-# Fedora => python2 and python3 variants
+# Fedora => python3 only
 # EL7 => python2 only
 # EL>7 => python3 only
-%if 0%{?fedora} || 0%{?rhel} > 7
-%global with_python3 1
-%endif
 
 Name: python-%{srcname}
 Version: 0.5.3
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 URL: https://github.com/svinota/%{srcname}
@@ -33,19 +23,7 @@ PyRoute2 provides several levels of API to work with Netlink
 protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
 IPQ.
 
-%if %{with python2}
-%package -n python2-%{srcname}
-Summary: %{summary}
-BuildRequires: python2-devel
-%{?python_provide:%python_provide python2-%{srcname}}
 
-%description -n python2-%{srcname}
-PyRoute2 provides several levels of API to work with Netlink
-protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
-IPQ.
-%endif
-
-%if %{with python3}
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary: %{summary}
 BuildRequires: python%{python3_pkgversion}-devel
@@ -55,45 +33,28 @@ BuildRequires: python%{python3_pkgversion}-devel
 PyRoute2 provides several levels of API to work with Netlink
 protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
 IPQ.
-%endif
 
 
 %prep
 %setup -q -n %{srcname}-%{version}
 
 %build
-%if %{with python2}
-%py2_build
-%endif
-%if %{with python3}
 %py3_build
-%endif
 
 %install
-%if %{with python2}
-%py2_install
-%endif
-%if %{with python3}
 %py3_install
-%endif
 
-%if %{with python2}
-%files -n python2-%{srcname}
-%if %{without python3}
-%{_bindir}/ss2
-%endif
-%doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
-%{python2_sitelib}/%{srcname}*
-%endif
 
-%if %{with python3}
 %files -n python%{python3_pkgversion}-%{srcname}
 %{_bindir}/ss2
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python3_sitelib}/%{srcname}*
-%endif
 
 %changelog
+* Mon Aug 26 2019 Miro Hrončok <mhroncok@redhat.com> - 0.5.3-6
+- Subpackage python2-pyroute2 has been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Sat Aug 17 2019 Miro Hrončok <mhroncok@redhat.com> - 0.5.3-5
 - Rebuilt for Python 3.8
 
