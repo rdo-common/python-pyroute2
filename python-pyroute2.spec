@@ -19,7 +19,7 @@
 
 Name: python-%{srcname}
 Version: 0.5.3
-Release: 5%{?dist}
+Release: 7%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 URL: https://github.com/svinota/%{srcname}
@@ -94,6 +94,13 @@ IPQ.
 %endif
 
 %changelog
+* Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 0.5.3-7
+- Rebuilt for Python 3.8.0rc1 (#1748018)
+
+* Mon Aug 26 2019 Miro Hrončok <mhroncok@redhat.com> - 0.5.3-6
+- Subpackage python2-pyroute2 has been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Sat Aug 17 2019 Miro Hrončok <mhroncok@redhat.com> - 0.5.3-5
 - Rebuilt for Python 3.8
 
