@@ -19,13 +19,15 @@
 
 Name: python-%{srcname}
 Version: 0.5.3
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 URL: https://github.com/svinota/%{srcname}
 
 BuildArch: noarch
 Source: https://pypi.io/packages/source/p/pyroute2/pyroute2-%{version}.tar.gz
+# https://github.com/svinota/pyroute2/pull/641
+Patch0001: 0001-Create-namespace-recursively-bind-mounting.patch
 
 
 %description
@@ -60,6 +62,7 @@ IPQ.
 
 %prep
 %setup -q -n %{srcname}-%{version}
+%patch0001 -p1
 
 %build
 %if %{with python2}
@@ -94,6 +97,9 @@ IPQ.
 %endif
 
 %changelog
+* Thu Oct 10 2019 Yatin Karel <ykarel@redhat.com> - 0.5.3-4
+- Add patch to fix rhbz#1760410
+
 * Wed Feb 06 2019 Alfredo Moralejo <amoralej@redhat.com> - 0.5.3-3
 - Fix build in CentOS7.
 
