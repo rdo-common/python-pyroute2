@@ -1,0 +1,34 @@
+From 3c38439bfa4620fa66eacdc5deb527d8eff7916c Mon Sep 17 00:00:00 2001
+From: Rodolfo Alonso Hernandez <ralonsoh@redhat.com>
+Date: Wed, 9 Oct 2019 15:48:37 +0000
+Subject: [PATCH] Create namespace recursively bind-mounting
+
+When ip netns {add|delete} is first run, it bind-mounts /var/run/netns
+on top of itself, then marks it as shared. However, if there are already
+bind-mounts in the directory from other tools, these would not be
+propagated. Fix this by recursively bind-mounting.
+
+Related Patch: https://patchwork.ozlabs.org/patch/796300/
+
+Issue: 640
+---
+ pyroute2/netns/__init__.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/pyroute2/netns/__init__.py b/pyroute2/netns/__init__.py
+index e247dc21..183d5974 100644
+--- a/pyroute2/netns/__init__.py
++++ b/pyroute2/netns/__init__.py
+@@ -222,7 +222,8 @@ def _create(netns, libc=None):
+     while libc.mount(b'', netnsdir, b'none', MS_SHARED | MS_REC, None) != 0:
+         if done:
+             raise OSError(ctypes.get_errno(), 'share rundir failed', netns)
+-        if libc.mount(netnsdir, netnsdir, b'none', MS_BIND, None) != 0:
++        if libc.mount(netnsdir, netnsdir, b'none', MS_BIND | MS_REC,
++                      None) != 0:
+             raise OSError(ctypes.get_errno(), 'mount rundir failed', netns)
+         done = True
+ 
+-- 
+2.20.1
+

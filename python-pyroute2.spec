@@ -1,44 +1,56 @@
 %global srcname pyroute2
-%global sum Pure Python netlink library
-
-%if 0%{?fedora}
-%global with_python3 1
-%endif
 
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
+%if 0%{?rhel} > 7
+# Disable python2 build by default
+%bcond_with python2
+%else
+%bcond_without python2
+%endif
+
+# FIXME(hguemar): Fix for EL7, in summary
+# Fedora => python2 and python3 variants
+# EL7 => python2 only
+# EL>7 => python3 only
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global with_python3 1
+%endif
+
 Name: python-%{srcname}
-Version: 0.4.21
-Release: 1%{?dist}
-Summary: %{sum}
+Version: 0.5.2
+Release: 4%{?dist}
+Summary: Pure Python netlink library
 License: GPLv2+
-Group: Development/Languages
 URL: https://github.com/svinota/%{srcname}
 
 BuildArch: noarch
-BuildRequires: python2-devel
-%if 0%{?with_python3}
-BuildRequires: python%{python3_pkgversion}-devel
-%endif
 Source: https://pypi.io/packages/source/p/pyroute2/pyroute2-%{version}.tar.gz
+# https://github.com/svinota/pyroute2/pull/641
+Patch0001: 0001-Create-namespace-recursively-bind-mounting.patch
+
 
 %description
 PyRoute2 provides several levels of API to work with Netlink
 protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
 IPQ.
 
+%if %{with python2}
 %package -n python2-%{srcname}
-Summary: %{sum}
+Summary: %{summary}
+BuildRequires: python2-devel
 %{?python_provide:%python_provide python2-%{srcname}}
 
 %description -n python2-%{srcname}
 PyRoute2 provides several levels of API to work with Netlink
 protocols, such as Generic Netlink, RTNL, TaskStats, NFNetlink,
 IPQ.
+%endif
 
-%if 0%{?with_python3}
+%if %{with python3}
 %package -n python%{python3_pkgversion}-%{srcname}
-Summary: %{sum}
+Summary: %{summary}
+BuildRequires: python%{python3_pkgversion}-devel
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
 %description -n python%{python3_pkgversion}-%{srcname}
@@ -50,30 +62,56 @@ IPQ.
 
 %prep
 %setup -q -n %{srcname}-%{version}
+%patch0001 -p1
 
 %build
+%if %{with python2}
 %py2_build
-%if 0%{?with_python3}
+%endif
+%if %{with python3}
 %py3_build
 %endif
 
 %install
+%if %{with python2}
 %py2_install
-%if 0%{?with_python3}
+%endif
+%if %{with python3}
 %py3_install
 %endif
 
+%if %{with python2}
 %files -n python2-%{srcname}
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python2_sitelib}/%{srcname}*
+%endif
 
-%if 0%{?with_python3}
+%if %{with python3}
 %files -n python%{python3_pkgversion}-%{srcname}
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python3_sitelib}/%{srcname}*
 %endif
 
 %changelog
+* Thu Oct 10 2019 Yatin Karel <ykarel@redhat.com> - 0.5.2-4
+- Add patch to fix rhbz#1760041
+
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Mon Jul 02 2018 Miro Hrončok <mhroncok@redhat.com> - 0.5.2-2
+- Rebuilt for Python 3.7
+
+* Thu Jun 21 2018 Haïkel Guémar <hguemar@fedoraproject.org> - 0.5.2-1
+- Upstream 0.5.2 (includes previous deprecated async arg patch)
+
+* Mon Jun 18 2018 Miro Hrončok <mhroncok@redhat.com> - 0.4.21-3
+- Rebuilt for Python 3.7
+
+* Fri Mar 16 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.4.21-2
+- Conditionalize the Python 2 subpackage
+- Don't build the Python 2 subpackage on EL > 7
+
 * Fri Feb 9 2018 amoralej <amoralej@redhat.com> - 0.4.21-1
 - Upstream 0.4.21
 
