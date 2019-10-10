@@ -26,6 +26,8 @@ URL: https://github.com/svinota/%{srcname}
 
 BuildArch: noarch
 Source: https://pypi.io/packages/source/p/pyroute2/pyroute2-%{version}.tar.gz
+# https://github.com/svinota/pyroute2/pull/641
+Patch0001: 0001-Create-namespace-recursively-bind-mounting.patch
 
 
 %description
@@ -60,6 +62,7 @@ IPQ.
 
 %prep
 %setup -q -n %{srcname}-%{version}
+%patch0001 -p1
 
 %build
 %if %{with python2}
@@ -81,6 +84,7 @@ IPQ.
 %files -n python2-%{srcname}
 %if %{without python3}
 %{_bindir}/ss2
+%{_bindir}/%{srcname}-cli
 %endif
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python2_sitelib}/%{srcname}*
@@ -89,6 +93,7 @@ IPQ.
 %if %{with python3}
 %files -n python%{python3_pkgversion}-%{srcname}
 %{_bindir}/ss2
+%{_bindir}/%{srcname}-cli
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python3_sitelib}/%{srcname}*
 %endif
@@ -96,6 +101,8 @@ IPQ.
 %changelog
 * Fri Oct 11 2019 Yatin Karel <ykarel@redhat.com> - 0.5.6-1
 - Update to 0.5.6
+- Add patch to fix rhbz#1760410
+- Readd python2 subpackage for El7
 
 * Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 0.5.3-7
 - Rebuilt for Python 3.8.0rc1 (#1748018)
