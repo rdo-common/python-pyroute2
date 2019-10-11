@@ -8,8 +8,8 @@
 # EL>7 => python3 only
 
 Name: python-%{srcname}
-Version: 0.5.3
-Release: 7%{?dist}
+Version: 0.5.6
+Release: 1%{?dist}
 Summary: Pure Python netlink library
 License: GPLv2+
 URL: https://github.com/svinota/%{srcname}
@@ -47,10 +47,14 @@ IPQ.
 
 %files -n python%{python3_pkgversion}-%{srcname}
 %{_bindir}/ss2
+%{_bindir}/%{srcname}-cli
 %doc README* LICENSE.GPL.v2 LICENSE.Apache.v2
 %{python3_sitelib}/%{srcname}*
 
 %changelog
+* Fri Oct 11 2019 Yatin Karel <ykarel@redhat.com> - 0.5.6-1
+- Update to 0.5.6
+
 * Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 0.5.3-7
 - Rebuilt for Python 3.8.0rc1 (#1748018)
 
