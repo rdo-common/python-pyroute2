@@ -1,0 +1,25 @@
+From 52a73b0dfcd9696823c7c81fea2cecb124b403d1 Mon Sep 17 00:00:00 2001
+From: yatinkarel <ykarel@redhat.com>
+Date: Thu, 13 Aug 2020 21:58:51 +0530
+Subject: [PATCH] iproute: fix link_lookup when index/ifname is not set #725
+
+---
+ pyroute2/iproute/linux.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyroute2/iproute/linux.py b/pyroute2/iproute/linux.py
+index e75d7852..87e97b7f 100644
+--- a/pyroute2/iproute/linux.py
++++ b/pyroute2/iproute/linux.py
+@@ -521,7 +521,7 @@ class RTNL_API(object):
+         Please note, that link_lookup() returns list, not one
+         value.
+         '''
+-        if list(kwarg) <= ['index', 'ifname']:
++        if set(kwarg) & {'index', 'ifname'}:
+             # shortcut for index and ifname
+             try:
+                 return [self.link('get', **kwarg)[0]['index']]
+-- 
+2.20.1
+
